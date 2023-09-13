@@ -1,4 +1,6 @@
 {
+  "page.title": "Star Wars Character Explorer",
+  "page.description": "A place where you are able to search and see information of all starwars characters from https://swapi.dev/.",
   "header.nav.about": "About",
   "header.nav.blog": "Blog",
   "header.nav.contacts": "Contacts",
