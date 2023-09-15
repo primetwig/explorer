@@ -4,5 +4,6 @@
   "header.nav.about": "About",
   "header.nav.blog": "Blog",
   "header.nav.contacts": "Contacts",
-  "header.burger.label": "Main menu"
+  "header.burger.label": "Main menu",
+  "search.placeholder": "Type to search..."
 }

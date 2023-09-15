@@ -29,6 +29,11 @@ export interface Person {
   url: string // "https://swapi.dev/api/people/1/"
 }
 
+export interface GetPeopleParams {
+  keyword?: string
+  page?: number
+}
+
 export interface GetPeopleSuccess extends PaginatedResponseSuccess {
   results: Person[]
 }

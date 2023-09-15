@@ -1,4 +1,4 @@
-import { GetPeopleSuccess, GetPersonSuccess } from './types'
+import { GetPeopleParams, GetPeopleSuccess, GetPersonSuccess } from './types'
 
 const API_BASE = 'https://swapi.dev/api'
 
@@ -23,7 +23,7 @@ const createUrl = (path: string, query?: Record<string, any>) => {
   return url
 }
 
-export const getPeople = (params?: { keyword?: string; page?: number }) => {
+export const getPeople = (params?: GetPeopleParams) => {
   const url = createUrl(`/people`, params)
   return fetch(url)
     .then(response => response.json() as Promise<GetPeopleSuccess>)
@@ -38,7 +38,7 @@ export const getPerson = (id: string) => {
 export const getAvatarUrl = (name: string) => {
   const q = name.split(' ').join('+')
   const url = `https://www.google.com/search?q=${q}&tbm=isch`
-  return fetch(url)
+  return fetch(url, { mode: 'no-cors'})
     .then(response => response.text())
     .then(html => {
       console.log({ html })
