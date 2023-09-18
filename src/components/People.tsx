@@ -3,17 +3,17 @@ import Link from 'next/link'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Alert from '@mui/material/Alert'
-import Typography from '@mui/material/Typography'
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import CircularProgress from '@mui/material/CircularProgress';
+import ImageList from '@mui/material/ImageList'
+import ImageListItem from '@mui/material/ImageListItem'
+import CircularProgress from '@mui/material/CircularProgress'
 import i18n from '@/i18n'
 import { routes } from '@/constants'
 import { useGetPeople } from '@/hooks/useGetPeople'
-import { getPersonId, formatDate } from '@/helpers'
+import { getPersonId } from '@/helpers'
 
 import Searchbar, { Search } from './Searchbar'
 import Avatar from './Avatar'
+import PersonInfo from './PersonInfo'
 
 export default function People() {
   const [search, setSearch] = useState<Search>({ keyword: '', page: 1 })
@@ -43,10 +43,7 @@ export default function People() {
               >
                 <Avatar name={person.name} />
                 <Box sx={{ p: 2, pt: 1 }}>
-                  <Typography>{i18n("people.label.name", { name: person.name })}</Typography>
-                  <Typography>{i18n("people.label.birth", { birth: person.birth_year })}</Typography>
-                  <Typography>{i18n("people.label.height", { height: person.height })}</Typography>
-                  <Typography>{i18n("people.label.created", { created: formatDate(person.created) })}</Typography>
+                  <PersonInfo person={person} short />
                 </Box>
               </ImageListItem>
             ))}

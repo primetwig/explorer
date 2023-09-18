@@ -1,10 +1,19 @@
-import { GetPeopleParams, GetPeopleSuccess, GetPersonSuccess } from './types'
+import {
+  GetPeopleParams,
+  GetPeopleSuccess,
+  GetPersonParams,
+  GetPersonSuccess,
+  GetPlanetParams,
+  GetPlanetSuccess,
+  GetSpecieParams,
+  GetSpecieSuccess,
+} from './types'
 
 const API_BASE = 'https://swapi.dev/api'
 
 const createQueryString = (params: Record<string, any>) => {
   return Object.keys(params)
-    .filter(key => typeof params[key] !== undefined)
+    .filter(key => typeof params[key] !== 'undefined')
     .map(key => {
       const value = params[key]
       const stringValue = Array.isArray(value)
@@ -30,8 +39,8 @@ export const getPeople = (params?: GetPeopleParams) => {
     .then(response => response.json() as Promise<GetPeopleSuccess>)
 }
 
-export const getPerson = (id: string) => {
-  const url = createUrl(`/people/${id}`)
+export const getPerson = (params: GetPersonParams) => {
+  const url = createUrl(`/people/${params.id}`)
   return fetch(url)
     .then(response => response.json() as Promise<GetPersonSuccess>)
 }
@@ -55,4 +64,16 @@ export const getAvatarUrl = (name: string) => {
 
       throw new Error(`No url for the name: ${name}`)
     })
+}
+
+export const getHomeworld = (params: GetPlanetParams) => {
+  const url = createUrl(`/planets/${params.id}`)
+  return fetch(url)
+    .then(response => response.json() as Promise<GetPlanetSuccess>)
+}
+
+export const getSpecie = (params: GetSpecieParams) => {
+  const url = createUrl(`/species/${params.id}`)
+  return fetch(url)
+    .then(response => response.json() as Promise<GetSpecieSuccess>)
 }

@@ -10,7 +10,13 @@ interface PaginatedResponseSuccess extends ResponseSuccess {
 	previous: string | null // "https://swapi.dev/api/people/?page=2"
 }
 
-export interface Person {
+interface Item {
+  created: string // "2014-12-09T13:50:51.644000Z"
+  edited: string // "2014-12-20T21:17:56.891000Z"
+  url: string // "https://swapi.dev/api/people/1/"
+}
+
+export interface Person extends Item {
   name: string // "Luke Skywalker"
   height: string // "172"
   mass: string // "77"
@@ -24,9 +30,6 @@ export interface Person {
   species: string[] // ["https://swapi.dev/api/species/2/"]
   vehicles: string[] // ["https://swapi.dev/api/vehicles/14/"]
   starships: string[] // ["https://swapi.dev/api/starships/12/"]
-  created: string // "2014-12-09T13:50:51.644000Z"
-  edited: string // "2014-12-20T21:17:56.891000Z"
-  url: string // "https://swapi.dev/api/people/1/"
 }
 
 export interface GetPeopleParams {
@@ -38,4 +41,49 @@ export interface GetPeopleSuccess extends PaginatedResponseSuccess {
   results: Person[]
 }
 
+export interface GetPersonParams {
+  id: string
+}
+
 export interface GetPersonSuccess extends ResponseSuccess, Person {}
+
+export interface Planet extends Item {
+  name: string // "Tatooine"
+  rotation_period: string // "23"
+  orbital_period: string // "304"
+  diameter: string // "10465"
+  climate: string // "arid"
+  gravity: string // "1 standard"
+  terrain: string // "desert"
+  surface_water: string // "1"
+  population: string // "200000"
+  residents: string[] // ["https://swapi.dev/api/people/1/"]
+  films: string[] // ["https://swapi.dev/api/films/1/"]
+}
+
+export interface GetPlanetParams {
+  id: string
+}
+
+export interface GetPlanetSuccess extends ResponseSuccess, Planet {}
+
+export interface Specie extends Item {
+  name: string // "Human"
+  classification: string // "mammal"
+  designation: string // "sentient"
+  average_height: string // "180"
+  skin_colors: string // "caucasian, black, asian, hispanic"
+  hair_colors: string // "blonde, brown, black, red"
+  eye_colors: string // "brown, blue, green, hazel, grey, amber"
+  average_lifespan: string // "120"
+  homeworld: string // "https://swapi.dev/api/planets/9/"
+  language: string // "Galactic Basic"
+  people: string[] // ["https://swapi.dev/api/people/66/"]
+  films: string[] // ["https://swapi.dev/api/films/1/"]
+}
+
+export interface GetSpecieParams {
+  id: string
+}
+
+export interface GetSpecieSuccess extends ResponseSuccess, Specie {}

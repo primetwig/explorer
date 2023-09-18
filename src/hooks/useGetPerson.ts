@@ -1,22 +1,20 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getPeople } from '@/api'
-import { Person, GetPeopleParams, GetPeopleSuccess } from '@/api/types'
+import { getPerson } from '@/api'
+import { Person, GetPersonParams, GetPersonSuccess } from '@/api/types'
 
 interface State {
-  people: Person[]
-  pagesCount: number
+  person: Person | null
   loading: boolean
   error: boolean
 }
 
-export const useGetPeople = (params: GetPeopleParams) => {
-  const [state, setState] = useState<State>({ people: [], pagesCount: 0, loading: true, error: false })
+export const useGetPerson = (params: GetPersonParams) => {
+  const [state, setState] = useState<State>({ person: null, loading: true, error: false })
 
-  const handleGetPeopleSuccess = useCallback((response: GetPeopleSuccess) => {
+  const handleGetPeopleSuccess = useCallback((response: GetPersonSuccess) => {
     setState(prev => ({
       ...prev,
-      people: response.results,
-      pagesCount: response.count,
+      person: response,
       loading: false,
       error: false,
     }))
@@ -24,7 +22,7 @@ export const useGetPeople = (params: GetPeopleParams) => {
   const handleGetPeopleError = useCallback(() => {
     setState(prev => ({
       ...prev,
-      people: [],
+      person: null,
       loading: false,
       error: true,
     }))
@@ -34,7 +32,7 @@ export const useGetPeople = (params: GetPeopleParams) => {
     setState(prev => ({ ...prev, loading: true }))
 
     const to = setTimeout(() => {
-      getPeople(params)
+      getPerson(params)
         .then(handleGetPeopleSuccess)
         .catch(handleGetPeopleError)
     }, 500)

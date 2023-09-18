@@ -1,8 +1,14 @@
 import { Person } from '@/api/types'
 
-export const getPersonId = (person: Person) => {
-  return person.url.split('/').filter(Boolean).pop()!
+const getIdOfResourse = (url: string) => {
+  return (url || '').split('/').filter(Boolean).pop()
 }
+
+export const getPersonId = (person: Person) => getIdOfResourse(person.url)!
+
+export const getHomeworldId = (person: Person) => getIdOfResourse(person.homeworld)!
+
+export const getSpeciesId = (person: Person) => getIdOfResourse(person.species[0])
 
 export const padZero = (n: number) => {
   return n > 9 ? String(n) : `0${n}`

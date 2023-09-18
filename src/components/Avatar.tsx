@@ -39,7 +39,7 @@ export default function Avatar({ name }: Props) {
   const isLoading = !isError && !state.url
 
   return (
-    <Box>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       {isError ? (
         <PersonIcon />
       ) : isLoading ? (
