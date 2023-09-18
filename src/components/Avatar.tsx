@@ -33,7 +33,7 @@ export default function Avatar({ name }: Props) {
       getAvatarUrl(name).then(handleUrl).catch(handleError)
     }, 500)
     return () => clearTimeout(to)
-  }, [name])
+  }, [name, handleUrl, handleError])
 
   const isError = state.error
   const isLoading = !isError && !state.url

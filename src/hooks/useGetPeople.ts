@@ -11,6 +11,7 @@ interface State {
 
 export const useGetPeople = (params: GetPeopleParams) => {
   const [state, setState] = useState<State>({ people: [], pagesCount: 0, loading: true, error: false })
+  const mainHookDeps = Object.values(params).join()
 
   const handleGetPeopleSuccess = useCallback((response: GetPeopleSuccess) => {
     setState(prev => ({
@@ -21,6 +22,7 @@ export const useGetPeople = (params: GetPeopleParams) => {
       error: false,
     }))
   }, [])
+
   const handleGetPeopleError = useCallback(() => {
     setState(prev => ({
       ...prev,
@@ -40,7 +42,8 @@ export const useGetPeople = (params: GetPeopleParams) => {
     }, 500)
 
     return () => clearTimeout(to)
-  }, [Object.values(params).join()])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mainHookDeps])
 
   return state
 }

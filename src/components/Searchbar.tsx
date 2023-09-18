@@ -18,11 +18,11 @@ export interface Props {
 export default function Searchbar({ search, onSearch, pagesCount }: Props) {
   const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch({ ...search, keyword: e.target.value })
-  }, [search])
+  }, [search, onSearch])
 
   const handlePageChange = useCallback((e: React.ChangeEvent<unknown>, value: number) => {
     onSearch({ ...search, page: value })
-  }, [search])
+  }, [search, onSearch])
 
   return (
     <Box sx={{ m: 2 }} autoComplete="off" component="form" noValidate>

@@ -37,6 +37,8 @@ interface State {
 
 export const useGetPersonDetails = (person: Person, options: { skip?: boolean } = {}) => {
   const [state, setState] = useState<State>({ details: null, loading: !options.skip, error: false })
+  const personId = getPersonId(person)
+  const mainHookDeps = Object.values(options).join()
 
   const handleSuccess = useCallback((
     [
@@ -94,7 +96,8 @@ export const useGetPersonDetails = (person: Person, options: { skip?: boolean } 
     }, 500)
 
     return () => clearTimeout(to)
-  }, [getPersonId(person), Object.values(options).join()])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [personId, mainHookDeps])
 
   return state
 }

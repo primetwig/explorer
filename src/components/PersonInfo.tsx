@@ -68,7 +68,7 @@ export default function PersonInfo({ person, short = false }: Props) {
                     passengers: starship.passengers,
                   }
                   return (
-                    <ListItem sx={{ display: 'list-item', p: 0 }}>
+                    <ListItem key={starship.name} sx={{ display: 'list-item', p: 0 }}>
                       <ListItemText
                         sx={{ m: 0 }}
                         primary={starship.name}
