@@ -1,4 +1,3 @@
-import {rejects} from 'assert'
 import transEN from './en.json'
 import transESMX from './es-MX.json'
 
@@ -27,12 +26,14 @@ const i18n = (key: string, variables?: Record<string, unknown>) => {
   if (variables) {
     Object.keys(variables).forEach(variable => {
       const value = variables[variable]
-      translation = translation?.replace(variable, String(value))
+      translation = translation?.replace(`$${variable}`, String(value))
     })
   }
 
   return translation
 }
+
+i18n.get = () => language
 
 i18n.set = (newLanguage: string) => {
   language = newLanguage

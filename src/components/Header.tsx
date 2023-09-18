@@ -66,7 +66,7 @@ export default function Header() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map(({ title, route }) => (
-                <MenuItem key={route} href={route} LinkComponent={Link} data-route={route} onClick={handleClickNavMenuItem}>
+                <MenuItem key={route} href={route} LinkComponent={Link}>
                   <Typography textAlign="center">{title}</Typography>
                 </MenuItem>
               ))}
@@ -79,8 +79,6 @@ export default function Header() {
                 key={route}
                 href={route}
                 LinkComponent={Link}
-                data-route={route}
-                onClick={handleClickNavMenuItem}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {title}
