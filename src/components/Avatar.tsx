@@ -41,7 +41,9 @@ export default function Avatar({ name }: Props) {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       {isError ? (
-        <PersonIcon />
+        <Box sx={{ position: 'relative', width: '100%', paddingBottom: '56%'}}>
+          <PersonIcon sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+        </Box>
       ) : isLoading ? (
         <CircularProgress />
       ) : (
