@@ -14,14 +14,22 @@ Then go to the project:
 cd ./explorer
 ```
 
+And install all deps:
+
+```bash
+npm ci
+# or
+yarn
+```
+
+Now you have 2 options:
+
 Option 1 is to run a development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
 Option 2 is to make a build and run it:
@@ -32,9 +40,6 @@ npm run start
 # or
 yarn build
 yarn start
-# or
-pnpm build
-pnpm start
 ```
 
 Either option will bring up the local server, which you can use.
