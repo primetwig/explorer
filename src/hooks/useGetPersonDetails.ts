@@ -2,16 +2,19 @@ import { useCallback, useEffect, useState } from 'react'
 import {
   getHomeworld,
   getSpecie,
+  getStarship,
 } from '@/api'
 import {
   Person,
   GetPlanetSuccess,
   GetSpecieSuccess,
+  GetStarshipSuccess,
 } from '@/api/types'
 import {
   getPersonId,
   getHomeworldId,
   getSpeciesId,
+  getStarshipIds,
 } from '@/helpers'
 
 interface Starship {
@@ -39,9 +42,11 @@ export const useGetPersonDetails = (person: Person, options: { skip?: boolean } 
     [
       planet,
       specie,
+      starships,
     ]: [
       GetPlanetSuccess,
       GetSpecieSuccess | null,
+      GetStarshipSuccess[],
     ],
   ) => {
     setState(prev => ({
@@ -51,7 +56,11 @@ export const useGetPersonDetails = (person: Person, options: { skip?: boolean } 
         averageLifespan: specie?.average_lifespan || null,
         classification: specie?.classification || null,
         language: specie?.language || null,
-        starships: [],
+        starships: starships.map(starship => ({
+          name: starship.name,
+          model: starship.model,
+          passengers: starship.passengers,
+        })),
       },
       loading: false,
       error: false,
@@ -78,6 +87,7 @@ export const useGetPersonDetails = (person: Person, options: { skip?: boolean } 
       Promise.all([
         getHomeworld({ id: getHomeworldId(person) }),
         speciesId ? getSpecie({ id: speciesId }) : Promise.resolve(null),
+        Promise.all(getStarshipIds(person).map(id => getStarship({ id })))
       ])
       .then(handleSuccess)
       .catch(handleError)

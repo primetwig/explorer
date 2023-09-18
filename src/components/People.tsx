@@ -35,7 +35,7 @@ export default function People() {
           </Alert>
         ) : (
           <ImageList>
-            {people.slice(0, 3).map(person => (
+            {people.map(person => (
               <ImageListItem
                 key={person.url}
                 component={Link}

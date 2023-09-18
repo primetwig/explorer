@@ -87,3 +87,27 @@ export interface GetSpecieParams {
 }
 
 export interface GetSpecieSuccess extends ResponseSuccess, Specie {}
+
+export interface Starship extends Item {
+  name: string // "X-wing"
+  model: string // "T-65 X-wing"
+  manufacturer: string // "Incom Corporation"
+  cost_in_credits: string // "149999"
+  length: string // "12.5"
+  max_atmosphering_speed: string // "1050"
+  crew: string // "1"
+  passengers: string // "0"
+  cargo_capacity: string // "110"
+  consumables: string // "1 week"
+  hyperdrive_rating: string // "1.0"
+  MGLT: string // "100"
+  starship_class: string // "Starfighter"
+  pilots: string[] // ["https://swapi.dev/api/people/1/"]
+  films: string[] // ["https://swapi.dev/api/films/1/"]
+}
+
+export interface GetStarshipParams {
+  id: string
+}
+
+export interface GetStarshipSuccess extends ResponseSuccess, Starship {}

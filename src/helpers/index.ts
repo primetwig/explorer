@@ -10,6 +10,8 @@ export const getHomeworldId = (person: Person) => getIdOfResourse(person.homewor
 
 export const getSpeciesId = (person: Person) => getIdOfResourse(person.species[0])
 
+export const getStarshipIds = (person: Person) => person.starships.map(url => getIdOfResourse(url)!)
+
 export const padZero = (n: number) => {
   return n > 9 ? String(n) : `0${n}`
 }

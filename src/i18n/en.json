@@ -19,6 +19,8 @@
   "person_info.average_lifespan": "Average lifespan: $average_lifespan",
   "person_info.classification": "Classification: $classification",
   "person_info.language": "Language: $language",
+  "person_info.starships": "Starships: ",
+  "person_info.starship_info": "(model: $model, $passengers passengers)",
   "person_info.n_a": "n/a",
   "people.error.no_data": "Some error has happened while loading characters. Please, refresh the page.",
   "person.error.no_data": "Some error has happened while loading character. Please, refresh the page.",
