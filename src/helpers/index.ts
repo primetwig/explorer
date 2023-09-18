@@ -1,7 +1,7 @@
 import { Person } from '@/api/types'
 
 export const getPersonId = (person: Person) => {
-  return person.url.split('/').filter(Boolean).pop()
+  return person.url.split('/').filter(Boolean).pop()!
 }
 
 export const padZero = (n: number) => {

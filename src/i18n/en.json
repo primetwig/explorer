@@ -5,5 +5,12 @@
   "header.nav.blog": "Blog",
   "header.nav.contacts": "Contacts",
   "header.burger.label": "Main menu",
-  "search.placeholder": "Type to search..."
+  "search.placeholder": "Type to search...",
+  "people.label.name": "Name: $name",
+  "people.label.birth": "Birth year: $birth",
+  "people.label.height": "Height: $height",
+  "people.label.created": "Created: $created",
+  "people.error.no_data": "Some error has happened while loading characters. Please, refresh the page.",
+  "about.title": "About page title",
+  "about.description": "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely."
 }

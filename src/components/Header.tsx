@@ -31,11 +31,6 @@ export default function Header() {
 
   const handleCloseNavMenu = useCallback(() => setAnchorElNav(null), [])
 
-  const handleClickNavMenuItem = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const route = e.currentTarget.getAttribute('data-route')
-    if (route) router.push(route)
-  }, [router])
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

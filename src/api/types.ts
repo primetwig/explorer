@@ -30,7 +30,7 @@ export interface Person {
 }
 
 export interface GetPeopleParams {
-  keyword?: string
+  search?: string
   page?: number
 }
 

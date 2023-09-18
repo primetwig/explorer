@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import Link from 'next/link'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
-import MenuItem from '@mui/material/MenuItem'
+import Alert from '@mui/material/Alert'
+import Typography from '@mui/material/Typography'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import CircularProgress from '@mui/material/CircularProgress';
 import i18n from '@/i18n'
 import { routes } from '@/constants'
@@ -16,14 +16,11 @@ import Searchbar, { Search } from './Searchbar'
 import Avatar from './Avatar'
 
 export default function People() {
-  const router = useRouter()
   const [search, setSearch] = useState<Search>({ keyword: '', page: 1 })
-  const { people, pagesCount, loading: isLoading, error: isError } = useGetPeople(search)
-
-  const handleClickPerson = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const id = e.currentTarget.getAttribute('data-id')
-    if (id) router.push(routes.person(id))
-  }, [router])
+  const { people, pagesCount, loading: isLoading, error: isError } = useGetPeople({
+    search: search.keyword || undefined, // do not send an empty string
+    page: search.page,
+  })
 
   return (
     <Container maxWidth="xl">
@@ -32,20 +29,25 @@ export default function People() {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         {isLoading ? (
           <CircularProgress />
+        ) : isError ? (
+          <Alert severity="error">
+            {i18n('people.error.no_data')}
+          </Alert>
         ) : (
-          <ImageList sx={{ width: 500 }}>
-            {people.map(person => (
-              <ImageListItem key={person.url} data-id={getPersonId(person)} onClick={handleClickPerson}>
+          <ImageList>
+            {people.slice(0, 3).map(person => (
+              <ImageListItem
+                key={person.url}
+                component={Link}
+                href={routes.person(getPersonId(person))}
+              >
                 <Avatar name={person.name} />
-                <p>Name: {person.name}</p>
-                <p>Birth year: {person.birth_year}</p>
-                <p>Height: {person.height}</p>
-                <p>Created: {formatDate(person.created)}</p>
-                {/* <ImageListItemBar
-                  title={item.title}
-                  subtitle={<span>by: {item.author}</span>}
-                  position="below"
-                /> */}
+                <Box sx={{ p: 2, pt: 1 }}>
+                  <Typography>{i18n("people.label.name", { name: person.name })}</Typography>
+                  <Typography>{i18n("people.label.birth", { birth: person.birth_year })}</Typography>
+                  <Typography>{i18n("people.label.height", { height: person.height })}</Typography>
+                  <Typography>{i18n("people.label.created", { created: formatDate(person.created) })}</Typography>
+                </Box>
               </ImageListItem>
             ))}
           </ImageList>

@@ -20,7 +20,7 @@ const translations: Translations = {
 let language = 'en'
 
 const i18n = (key: string, variables?: Record<string, unknown>) => {
-  let translation = translations[language]?.[key];
+  let translation = translations[language]?.[key]
   if (!translation) return key
 
   if (variables) {

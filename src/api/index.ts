@@ -4,6 +4,7 @@ const API_BASE = 'https://swapi.dev/api'
 
 const createQueryString = (params: Record<string, any>) => {
   return Object.keys(params)
+    .filter(key => typeof params[key] !== undefined)
     .map(key => {
       const value = params[key]
       const stringValue = Array.isArray(value)
@@ -36,15 +37,22 @@ export const getPerson = (id: string) => {
 }
 
 export const getAvatarUrl = (name: string) => {
-  const q = name.split(' ').join('+')
-  const url = `https://www.google.com/search?q=${q}&tbm=isch`
-  return fetch(url, { mode: 'no-cors'})
-    .then(response => response.text())
+  const url = `/api/avatar?name=${encodeURI(name)}`
+  return fetch(url)
+    .then(res => res.text())
     .then(html => {
-      console.log({ html })
       const div = document.createElement('div')
-      div.innerHTML = html // yes, I trust google in this pet project
-      const img = div.querySelector('h2 + * img') // first image of search results
-      return img?.getAttribute('src') || ''
+
+      // some sanitization is expected to be here in real project
+      div.innerHTML = html
+
+      // first image of search results
+      const img = div.querySelector('.thumbnail img')
+
+      const url = img?.getAttribute('src')
+
+      if (url) return url
+
+      throw new Error(`No url for the name: ${name}`)
     })
 }
