@@ -16,8 +16,8 @@ export const useGetPeople = (params: GetPeopleParams) => {
   const handleGetPeopleSuccess = useCallback((response: GetPeopleSuccess) => {
     setState(prev => ({
       ...prev,
-      people: response.results,
-      entriesCount: response.count,
+      people: response.results || [],
+      entriesCount: response.count || 0,
       loading: false,
       error: false,
     }))

@@ -33,6 +33,12 @@ export default function People() {
           <Alert severity="error">
             {i18n('people.error.no_data')}
           </Alert>
+        ) : people.length === 0 ? (
+          <Alert severity="info">
+            {search.keyword
+              ? i18n('people.info.empty_search')
+              : i18n('people.info.empty')}
+          </Alert>
         ) : (
           <ImageList>
             {people.map(person => (
