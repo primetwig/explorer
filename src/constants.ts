@@ -5,3 +5,5 @@ export const routes = {
   contacts: () => '/contacts',
   person: (id: string) => `/people/${id}`,
 }
+
+export const ITEMS_ON_PAGE = 10

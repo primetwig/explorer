@@ -17,14 +17,14 @@ import PersonInfo from './PersonInfo'
 
 export default function People() {
   const [search, setSearch] = useState<Search>({ keyword: '', page: 1 })
-  const { people, pagesCount, loading: isLoading, error: isError } = useGetPeople({
+  const { people, entriesCount, loading: isLoading, error: isError } = useGetPeople({
     search: search.keyword || undefined, // do not send an empty string
     page: search.page,
   })
 
   return (
     <Container maxWidth="xl">
-      <Searchbar search={search} onSearch={setSearch} pagesCount={pagesCount} />
+      <Searchbar search={search} onSearch={setSearch} entriesCount={entriesCount} />
 
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         {isLoading ? (

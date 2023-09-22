@@ -3,6 +3,7 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Pagination from '@mui/material/Pagination'
 import i18n from '@/i18n'
+import { ITEMS_ON_PAGE } from '@/constants'
 
 export interface Search {
   keyword: string
@@ -12,10 +13,12 @@ export interface Search {
 export interface Props {
   search: Search
   onSearch: (search: Search) => void
-  pagesCount: number
+  entriesCount: number
 }
 
-export default function Searchbar({ search, onSearch, pagesCount }: Props) {
+export default function Searchbar({ search, onSearch, entriesCount }: Props) {
+  const pagesCount = Math.ceil(entriesCount / ITEMS_ON_PAGE)
+
   const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch({ ...search, keyword: e.target.value })
   }, [search, onSearch])

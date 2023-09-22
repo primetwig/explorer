@@ -4,20 +4,20 @@ import { Person, GetPeopleParams, GetPeopleSuccess } from '@/api/types'
 
 interface State {
   people: Person[]
-  pagesCount: number
+  entriesCount: number
   loading: boolean
   error: boolean
 }
 
 export const useGetPeople = (params: GetPeopleParams) => {
-  const [state, setState] = useState<State>({ people: [], pagesCount: 0, loading: true, error: false })
+  const [state, setState] = useState<State>({ people: [], entriesCount: 0, loading: true, error: false })
   const mainHookDeps = Object.values(params).join()
 
   const handleGetPeopleSuccess = useCallback((response: GetPeopleSuccess) => {
     setState(prev => ({
       ...prev,
       people: response.results,
-      pagesCount: response.count,
+      entriesCount: response.count,
       loading: false,
       error: false,
     }))
