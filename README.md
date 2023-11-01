@@ -1,4 +1,17 @@
+## About
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+It is made to show an up-to-date example of how I develop.
+
+Here are some requirements, which were set for this project:
+- create at least 2 pages: list page and details page
+- use [The Star Wars API](https://swapi.dev/) for requests
+- list page should have a search and pagination
+- details page should have non-direct data of the main item \
+  (e.g. if person has a vehicle id, then show some relevant info of that vehicle as well)
+- API has no images, so find another way to show relevant images
+- use Material UI for styling
 
 ## Getting Started
 
